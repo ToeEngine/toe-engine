@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>br.toe</groupId>
+        <artifactId>parent-1</artifactId>
+        <version>1.0.0</version>
+        <relativePath>../parent-1</relativePath>
+    </parent>
+
+    <artifactId>parent-2</artifactId>
+    <packaging>pom</packaging>
+
+    <version>1.0.0</version>
+
+    <properties>
+        <lwjgl.version>3.3.0</lwjgl.version>
+        <joml.version>1.10.2</joml.version>
+        <lwjgl.natives>natives-linux</lwjgl.natives>
+        <lombok.version>1.18.22</lombok.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.lwjgl</groupId>
+                <artifactId>lwjgl-bom</artifactId>
+                <version>${lwjgl.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- ############################################# -->
+        <!--                     JOML                      -->
+        <!-- ############################################# -->
+        <dependency>
+            <groupId>org.joml</groupId>
+            <artifactId>joml</artifactId>
+            <version>${joml.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+        <!-- ############################################# -->
+        <!--                   BYTE BUDY                   -->
+        <!-- ############################################# -->
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>1.12.6</version>
+        </dependency>
+    </dependencies>
+</project>

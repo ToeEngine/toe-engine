@@ -1,0 +1,20 @@
+package br.toe.engine.event;
+
+public enum EventType {
+
+    INPUT_PRESSED,
+    INPUT_RELEASED,
+
+    KEY_TYPED,
+
+    MOUSE_MOVED,
+    MOUSE_SCROLLED,
+
+    WINDOW_CLOSED,
+    WINDOW_ICONIFIED,
+    WINDOW_MAXIMIZED,
+    WINDOW_RESTORED,
+    WINDOW_RESIZED,
+    WINDOW_FOCUS_LOST,
+    WINDOW_FOCUS_GAINED
+}

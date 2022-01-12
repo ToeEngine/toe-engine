@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                    <compilerArgs>--enable-preview</compilerArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <parent>
+        <groupId>br.toe</groupId>
+        <artifactId>parent-2</artifactId>
+        <version>1.0.0</version>
+        <relativePath>../parent-2</relativePath>
+    </parent>
+
+    <artifactId>toe-renderer</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <imgui.version>1.86.0</imgui.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>br.toe</groupId>
+            <artifactId>toe-shared</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!-- ############################################# -->
+        <!--                     GLFW                      -->
+        <!-- ############################################# -->
+        <dependency>
+            <groupId>org.lwjgl</groupId>
+            <artifactId>lwjgl-glfw</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.lwjgl</groupId>
+            <artifactId>lwjgl-glfw</artifactId>
+            <classifier>${lwjgl.natives}</classifier>
+        </dependency>
+        <!-- ############################################# -->
+        <!--                     imGUI                     -->
+        <!-- ############################################# -->
+        <dependency>
+            <groupId>io.github.spair</groupId>
+            <artifactId>imgui-java-binding</artifactId>
+            <version>${imgui.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.spair</groupId>
+            <artifactId>imgui-java-lwjgl3</artifactId>
+            <version>${imgui.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.spair</groupId>
+            <artifactId>imgui-java-natives-linux</artifactId>
+            <version>${imgui.version}</version>
+        </dependency>
+
+    </dependencies>
+</project>

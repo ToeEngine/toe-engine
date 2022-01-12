@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>br.toe</groupId>
+        <artifactId>parent-2</artifactId>
+        <version>1.0.0</version>
+        <relativePath>../parent-2</relativePath>
+    </parent>
+
+    <artifactId>toe-renderer-opengl</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>br.toe</groupId>
+            <artifactId>toe-renderer</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!-- ############################################# -->
+        <!--                    OPENGL                     -->
+        <!-- ############################################# -->
+        <dependency>
+            <groupId>org.lwjgl</groupId>
+            <artifactId>lwjgl-opengl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.lwjgl</groupId>
+            <artifactId>lwjgl-opengl</artifactId>
+            <classifier>${lwjgl.natives}</classifier>
+        </dependency>
+    </dependencies>
+</project>
