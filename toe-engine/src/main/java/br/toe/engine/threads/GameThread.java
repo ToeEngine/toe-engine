@@ -29,17 +29,19 @@ public final class GameThread extends SharedThread {
 
     @Override
     protected void perFrame () {
-        renderer.clear();
-        renderer.render();
+        frame++;
 
         Arrays.stream(Layers.layers()).forEach(Layer::update);
+
+        renderer.clear();
+        renderer.render();
 
         window.refresh();
     }
 
     @Override
     protected void perSecond () {
-
+        frame = 0;
     }
 
     @Override

@@ -4,6 +4,7 @@ import br.toe.utils.*;
 
 abstract class SharedThread extends ToeThread {
 
+    protected static volatile int frame;
     private long nanos = 0L;
 
     protected abstract void perFrame();
