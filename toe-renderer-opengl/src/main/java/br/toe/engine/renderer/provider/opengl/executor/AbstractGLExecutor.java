@@ -1,8 +1,8 @@
 package br.toe.engine.renderer.provider.opengl.executor;
 
-import br.toe.engine.platform.logger.*;
 import br.toe.engine.renderer.*;
 import br.toe.engine.renderer.provider.*;
+import br.toe.framework.logging.*;
 import br.toe.framework.reflection.*;
 import org.lwjgl.opengl.*;
 

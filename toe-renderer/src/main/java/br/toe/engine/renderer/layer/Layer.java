@@ -1,6 +1,6 @@
 package br.toe.engine.renderer.layer;
 
-import br.toe.engine.platform.logger.*;
+import br.toe.framework.logging.*;
 
 import java.util.*;
 import java.util.concurrent.*;

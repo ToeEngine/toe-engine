@@ -1,9 +1,9 @@
 package br.toe.engine.renderer.provider.opengl;
 
-import br.toe.engine.platform.logger.*;
 import br.toe.engine.renderer.*;
 import br.toe.engine.renderer.provider.*;
 import br.toe.engine.utils.*;
+import br.toe.framework.logging.*;
 import br.toe.game.*;
 import org.joml.*;
 import org.lwjgl.opengl.*;

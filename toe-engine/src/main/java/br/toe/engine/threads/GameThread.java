@@ -1,10 +1,10 @@
 package br.toe.engine.threads;
 
 import br.toe.*;
-import br.toe.engine.platform.logger.*;
 import br.toe.engine.platform.window.*;
 import br.toe.engine.renderer.*;
 import br.toe.engine.renderer.layer.*;
+import br.toe.framework.logging.*;
 
 import java.util.*;
 

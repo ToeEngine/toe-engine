@@ -1,12 +1,14 @@
-package br.toe.engine.platform.logger;
+package br.toe.framework.logging;
 
 public enum LogLevel {
+    OFF(-1, ""),
     FATAL(0, "FATAL  "),
     ERROR(1, "ERROR  "),
     WARNING(2, "WARNING"),
     INFO(3, "INFO   "),
     DEBUG(4, "DEBUG  "),
-    TRACE(5, "TRACE  ");
+    TRACE(5, "TRACE  "),
+    ALL(5, "");
 
     private final int code;
     private final String formatted;

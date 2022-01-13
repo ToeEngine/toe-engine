@@ -1,8 +1,8 @@
 package br.toe.engine.platform.window;
 
 import br.toe.engine.platform.Platform;
-import br.toe.engine.platform.logger.*;
 import br.toe.framework.cdi.annotation.*;
+import br.toe.framework.logging.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.system.*;
 

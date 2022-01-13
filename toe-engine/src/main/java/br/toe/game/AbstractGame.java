@@ -2,8 +2,7 @@ package br.toe.game;
 
 import br.toe.engine.event.*;
 import br.toe.engine.platform.*;
-import br.toe.engine.platform.logger.*;
-import br.toe.engine.platform.os.linux.*;
+import br.toe.engine.platform.linux.*;
 import br.toe.engine.platform.window.*;
 import br.toe.engine.platform.window.event.*;
 import br.toe.engine.renderer.*;
@@ -11,6 +10,7 @@ import br.toe.engine.renderer.layer.*;
 import br.toe.engine.renderer.provider.*;
 import br.toe.engine.threads.*;
 import br.toe.framework.cdi.*;
+import br.toe.framework.logging.*;
 import br.toe.framework.reflection.*;
 import br.toe.utils.*;
 import net.bytebuddy.agent.*;
@@ -21,7 +21,7 @@ import java.util.concurrent.*;
 public abstract class AbstractGame {
     static {
         if (Platform.IS_LINUX)
-            Registry.register(Logger.class, LinuxLogger.class);
+            Registry.register(LogWriter.class, LinuxLogWriter.class);
 
 
         final var logger = LoggerFactory.getLogger(AbstractGame.class);

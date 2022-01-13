@@ -1,7 +1,7 @@
 package br.toe.engine.event;
 
-import br.toe.engine.platform.logger.*;
 import br.toe.framework.cdi.annotation.*;
+import br.toe.framework.logging.*;
 import br.toe.framework.reflection.*;
 
 import java.util.*;

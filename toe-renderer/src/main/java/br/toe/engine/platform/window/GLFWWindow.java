@@ -1,8 +1,8 @@
 package br.toe.engine.platform.window;
 
 import br.toe.engine.platform.*;
-import br.toe.engine.platform.logger.*;
 import br.toe.framework.cdi.*;
+import br.toe.framework.logging.*;
 import br.toe.game.*;
 import br.toe.utils.*;
 import org.joml.*;

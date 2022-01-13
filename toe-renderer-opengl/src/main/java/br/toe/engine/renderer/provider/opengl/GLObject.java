@@ -1,8 +1,8 @@
 package br.toe.engine.renderer.provider.opengl;
 
 import br.toe.engine.platform.*;
-import br.toe.engine.platform.logger.*;
 import br.toe.engine.utils.*;
+import br.toe.framework.logging.*;
 import br.toe.game.*;
 import br.toe.utils.*;
 import net.bytebuddy.*;

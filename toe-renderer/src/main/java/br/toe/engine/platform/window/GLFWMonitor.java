@@ -1,11 +1,11 @@
 package br.toe.engine.platform.window;
 
 import br.toe.engine.platform.*;
-import br.toe.engine.platform.logger.*;
 import br.toe.framework.cdi.annotation.*;
-import org.joml.*;
+import br.toe.framework.logging.*;
 import org.joml.Math;
-import org.lwjgl.glfw.*;
+import org.joml.*;
+import org.lwjgl.glfw.GLFW;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.glfw.GLFW.*;

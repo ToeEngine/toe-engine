@@ -1,6 +1,6 @@
 package br.toe.engine.threads;
 
-import br.toe.engine.platform.logger.*;
+import br.toe.framework.logging.*;
 import br.toe.game.*;
 import br.toe.utils.*;
 
