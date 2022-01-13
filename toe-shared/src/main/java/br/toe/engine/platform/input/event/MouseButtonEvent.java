@@ -1,15 +1,16 @@
 package br.toe.engine.platform.input.event;
 
 import br.toe.engine.event.*;
+import br.toe.engine.platform.input.*;
 import lombok.*;
 
 abstract class MouseButtonEvent extends MouseEvent {
 
     @Getter
-    private final int keycode;
+    private final InputMouse button;
 
-    protected MouseButtonEvent (EventType type, int keycode) {
+    protected MouseButtonEvent (EventType type, InputMouse button) {
         super(type);
-        this.keycode = keycode;
+        this.button = button;
     }
 }

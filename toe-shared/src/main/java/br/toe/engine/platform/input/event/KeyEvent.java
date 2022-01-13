@@ -1,15 +1,16 @@
 package br.toe.engine.platform.input.event;
 
 import br.toe.engine.event.*;
+import br.toe.engine.platform.input.*;
 import lombok.*;
 
 abstract class KeyEvent extends Event {
 
     @Getter
-    private final int keycode;
+    private final InputKey key;
 
-    protected KeyEvent (EventType type, int keycode) {
+    protected KeyEvent (EventType type, InputKey key) {
         super(type, EventCategory.INPUT, EventCategory.KEYBOARD);
-        this.keycode = keycode;
+        this.key = key;
     }
 }

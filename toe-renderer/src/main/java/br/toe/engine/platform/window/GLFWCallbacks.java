@@ -1,6 +1,7 @@
 package br.toe.engine.platform.window;
 
 import br.toe.engine.event.*;
+import br.toe.engine.platform.input.*;
 import br.toe.engine.platform.input.event.*;
 import br.toe.engine.platform.logger.*;
 import br.toe.engine.platform.window.event.*;
@@ -94,13 +95,15 @@ public class GLFWCallbacks {
         LOGGER.trace("Creating Keyboard Callbacks");
         final var locals = new Stack<Callback>();
         locals.add(new GLFWKeyCallback() {
+            private final InputMapper mapper = InputMapper.get();
+
             @Override
             public void invoke(long window, int key, int scancode, int action, int mods) {
                 if (action == GLFW.GLFW_PRESS)
-                    bus.post(new KeyPressedEvent(key));
+                    bus.post(new KeyPressedEvent(mapper.inputKey(key)));
 
                 if (action == GLFW.GLFW_RELEASE)
-                    bus.post(new KeyReleasedEvent(key));
+                    bus.post(new KeyReleasedEvent(mapper.inputKey(key)));
             }
         });
 
@@ -122,13 +125,15 @@ public class GLFWCallbacks {
         final var locals = new Stack<Callback>();
 
         locals.add(new GLFWMouseButtonCallback() {
+            private final InputMapper mapper = InputMapper.get();
+
             @Override
             public void invoke(long window, int button, int action, int mods) {
                 if (action == GLFW.GLFW_PRESS)
-                    bus.post(new MouseButtonPressedEvent(button));
+                    bus.post(new MouseButtonPressedEvent(mapper.inputMouse(button)));
 
                 if (action == GLFW.GLFW_RELEASE)
-                    bus.post(new MouseButtonReleasedEvent(button));
+                    bus.post(new MouseButtonReleasedEvent(mapper.inputMouse(button)));
             }
         });
 

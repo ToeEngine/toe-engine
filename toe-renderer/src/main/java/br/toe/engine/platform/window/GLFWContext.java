@@ -1,6 +1,8 @@
 package br.toe.engine.platform.window;
 
+import br.toe.engine.platform.input.*;
 import br.toe.engine.platform.logger.*;
+import br.toe.framework.cdi.*;
 import br.toe.utils.*;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -19,6 +21,9 @@ public final class GLFWContext implements Lifecycle {
         LOGGER.debug("----------- GLFW -----------");
         LOGGER.debug("Version: %s", glfwGetVersionString());
         LOGGER.debug("----------- GLFW -----------");
+
+        Registry.register(Input.class, GLFWInput.class);
+        Registry.register(InputMapper.class, GLFWInputMapper.class);
     }
 
     @Override

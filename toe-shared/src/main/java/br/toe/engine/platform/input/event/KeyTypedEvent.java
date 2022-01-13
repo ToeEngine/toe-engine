@@ -1,10 +1,16 @@
 package br.toe.engine.platform.input.event;
 
 import br.toe.engine.event.*;
+import lombok.*;
 
-public final class KeyTypedEvent extends KeyEvent {
+public final class KeyTypedEvent extends Event {
 
-    public KeyTypedEvent (int keycode) {
-        super(EventType.KEY_TYPED, keycode);
+    @Getter
+    private int codepoint;
+
+    public KeyTypedEvent (int codepoint) {
+        super(EventType.KEY_TYPED);
+
+        this.codepoint = codepoint;
     }
 }

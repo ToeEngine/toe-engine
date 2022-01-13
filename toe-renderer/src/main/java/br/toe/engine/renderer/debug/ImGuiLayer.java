@@ -4,6 +4,7 @@ import br.toe.engine.event.*;
 import br.toe.engine.platform.Platform;
 import br.toe.engine.platform.*;
 import br.toe.engine.platform.imgui.*;
+import br.toe.engine.platform.input.*;
 import br.toe.engine.platform.input.event.*;
 import br.toe.engine.platform.logger.*;
 import br.toe.engine.platform.window.*;
@@ -87,28 +88,28 @@ public class ImGuiLayer extends Layer {
 
         // Keyboard mapping. ImGui will use those indices to peek into the io.KeysDown[] array.
         final int[] keyMap = new int[ImGuiKey.COUNT];
-        keyMap[ImGuiKey.Tab] = GLFW_KEY_TAB;
-        keyMap[ImGuiKey.LeftArrow] = GLFW_KEY_LEFT;
-        keyMap[ImGuiKey.RightArrow] = GLFW_KEY_RIGHT;
-        keyMap[ImGuiKey.UpArrow] = GLFW_KEY_UP;
-        keyMap[ImGuiKey.DownArrow] = GLFW_KEY_DOWN;
-        keyMap[ImGuiKey.PageUp] = GLFW_KEY_PAGE_UP;
-        keyMap[ImGuiKey.PageDown] = GLFW_KEY_PAGE_DOWN;
-        keyMap[ImGuiKey.Home] = GLFW_KEY_HOME;
-        keyMap[ImGuiKey.End] = GLFW_KEY_END;
-        keyMap[ImGuiKey.Insert] = GLFW_KEY_INSERT;
-        keyMap[ImGuiKey.Delete] = GLFW_KEY_DELETE;
-        keyMap[ImGuiKey.Backspace] = GLFW_KEY_BACKSPACE;
-        keyMap[ImGuiKey.Space] = GLFW_KEY_SPACE;
-        keyMap[ImGuiKey.Enter] = GLFW_KEY_ENTER;
-        keyMap[ImGuiKey.Escape] = GLFW_KEY_ESCAPE;
-        keyMap[ImGuiKey.KeyPadEnter] = GLFW_KEY_KP_ENTER;
-        keyMap[ImGuiKey.A] = GLFW_KEY_A;
-        keyMap[ImGuiKey.C] = GLFW_KEY_C;
-        keyMap[ImGuiKey.V] = GLFW_KEY_V;
-        keyMap[ImGuiKey.X] = GLFW_KEY_X;
-        keyMap[ImGuiKey.Y] = GLFW_KEY_Y;
-        keyMap[ImGuiKey.Z] = GLFW_KEY_Z;
+        keyMap[ImGuiKey.Tab] = InputKey.KEY_TAB.getKeycode();
+        keyMap[ImGuiKey.LeftArrow] = InputKey.KEY_LEFT.getKeycode();
+        keyMap[ImGuiKey.RightArrow] = InputKey.KEY_RIGHT.getKeycode();
+        keyMap[ImGuiKey.UpArrow] = InputKey.KEY_UP.getKeycode();
+        keyMap[ImGuiKey.DownArrow] = InputKey.KEY_DOWN.getKeycode();
+        keyMap[ImGuiKey.PageUp] = InputKey.KEY_KP_9.getKeycode();
+        keyMap[ImGuiKey.PageDown] = InputKey.KEY_KP_3.getKeycode();
+        keyMap[ImGuiKey.Home] = InputKey.KEY_HOME.getKeycode();
+        keyMap[ImGuiKey.End] = InputKey.KEY_END.getKeycode();
+        keyMap[ImGuiKey.Insert] = InputKey.KEY_INSERT.getKeycode();
+        keyMap[ImGuiKey.Delete] = InputKey.KEY_DELETE.getKeycode();
+        keyMap[ImGuiKey.Backspace] = InputKey.KEY_BACKSPACE.getKeycode();
+        keyMap[ImGuiKey.Space] = InputKey.KEY_SPACE.getKeycode();
+        keyMap[ImGuiKey.Enter] = InputKey.KEY_ENTER.getKeycode();
+        keyMap[ImGuiKey.Escape] = InputKey.KEY_ESCAPE.getKeycode();
+        keyMap[ImGuiKey.KeyPadEnter] = InputKey.KEY_KP_ENTER.getKeycode();
+        keyMap[ImGuiKey.A] = InputKey.KEY_A.getKeycode();
+        keyMap[ImGuiKey.C] = InputKey.KEY_C.getKeycode();
+        keyMap[ImGuiKey.V] = InputKey.KEY_V.getKeycode();
+        keyMap[ImGuiKey.X] = InputKey.KEY_X.getKeycode();
+        keyMap[ImGuiKey.Y] = InputKey.KEY_Y.getKeycode();
+        keyMap[ImGuiKey.Z] = InputKey.KEY_Z.getKeycode();
         io.setKeyMap(keyMap);
 
         renderer.initialize();
@@ -129,48 +130,71 @@ public class ImGuiLayer extends Layer {
         if (glfwGetWindowAttrib(windowPtr, GLFW_FOCUSED) == GLFW_FALSE)
             return;
 
-        switch (e) {
+        switch (e.getClass().getSimpleName()) {
             default -> {}
-            case MouseMovedEvent event ->
-                    io.setMousePos(event.getPosition().x(), event.getPosition().y());
+            case "MouseMovedEvent"  -> {
+                final var event = (MouseMovedEvent) e;
 
-            case MouseScrolledEvent event -> {
+                io.setMousePos(event.getPosition().x(), event.getPosition().y());
+            }
+
+            case "MouseScrolledEvent" -> {
+                final var event = (MouseScrolledEvent) e;
+
                 io.setMouseWheelH(io.getMouseWheelH() + event.getPosition().x());
                 io.setMouseWheel(io.getMouseWheel() + event.getPosition().y());
             }
 
-            case MouseButtonPressedEvent event ->
-                io.setMouseDown(event.getKeycode(), true);
+            case "MouseButtonPressedEvent" -> {
+                final var event = (MouseButtonPressedEvent) e;
 
-            case MouseButtonReleasedEvent event ->
-                io.setMouseDown(event.getKeycode(), false);
+                io.setMouseDown(switch (event.getButton()) {
+                    case BUTTON_LEFT -> 0;
+                    case BUTTON_RIGHT -> 1;
+                    case BUTTON_MIDDLE -> 2;
+                }, true);
+            }
 
-            case WindowResizedEvent event -> {
+            case "MouseButtonReleasedEvent" -> {
+                final var event = (MouseButtonReleasedEvent) e;
+
+                io.setMouseDown(switch (event.getButton()) {
+                    case BUTTON_LEFT -> 0;
+                    case BUTTON_RIGHT -> 1;
+                    case BUTTON_MIDDLE -> 2;
+                }, false);
+            }
+
+            case "WindowResizedEvent" -> {
+                final var event = (WindowResizedEvent) e;
+
                 final var size = event.getSize();
                 io.setDisplaySize(size.x(), size.y());
                 io.setDisplayFramebufferScale(1f, 1f);
             }
 
-            case WindowClosedEvent event -> {
+            case "KeyPressedEvent" -> {
+                final var event = (KeyPressedEvent) e;
 
+                io.setKeysDown(event.getKey().getKeycode(), true);
+                io.setKeyCtrl(io.getKeysDown(InputKey.KEY_LEFT_CTRL.getKeycode()) || io.getKeysDown(InputKey.KEY_RIGHT_CTRL.getKeycode()));
+                io.setKeyShift(io.getKeysDown(InputKey.KEY_LEFT_SHIFT.getKeycode()) || io.getKeysDown(InputKey.KEY_RIGHT_SHIFT.getKeycode()));
+                io.setKeyAlt(io.getKeysDown(InputKey.KEY_LEFT_ALT.getKeycode()) || io.getKeysDown(InputKey.KEY_RIGHT_ALT.getKeycode()));
+                io.setKeySuper(io.getKeysDown(InputKey.KEY_LEFT_SUPER.getKeycode()) || io.getKeysDown(InputKey.KEY_RIGHT_SUPER.getKeycode()));
             }
 
-            case KeyPressedEvent event -> {
-                io.setKeysDown(event.getKeycode(), true);
-                io.setKeyCtrl(io.getKeysDown(GLFW_KEY_LEFT_CONTROL) || io.getKeysDown(GLFW_KEY_RIGHT_CONTROL));
-                io.setKeyShift(io.getKeysDown(GLFW_KEY_LEFT_SHIFT) || io.getKeysDown(GLFW_KEY_RIGHT_SHIFT));
-                io.setKeyAlt(io.getKeysDown(GLFW_KEY_LEFT_ALT) || io.getKeysDown(GLFW_KEY_RIGHT_ALT));
-                io.setKeySuper(io.getKeysDown(GLFW_KEY_LEFT_SUPER) || io.getKeysDown(GLFW_KEY_RIGHT_SUPER));
+            case "KeyReleasedEvent" -> {
+                final var event = (KeyReleasedEvent) e;
+
+                io.setKeysDown(event.getKey().getKeycode(), false);
             }
 
-            case KeyReleasedEvent event ->
-                io.setKeysDown(event.getKeycode(), false);
+            case "KeyTypedEvent" -> {
+                final var event = (KeyTypedEvent) e;
 
-            case KeyTypedEvent event -> {
-                final var keycode = event.getKeycode();
-
-                if (keycode > 0 && keycode < 0x10000)
-                    io.addInputCharacter(keycode);
+                final var codepoint = event.getCodepoint();
+                if (codepoint > 0 && codepoint < 0x10000)
+                    io.addInputCharacter(codepoint);
             }
         }
     }
