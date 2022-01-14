@@ -20,6 +20,11 @@ public final class WorldLayer extends Layer {
     }
 
     @Override
+    public void render () {
+
+    }
+
+    @Override
     public void handle (Event event) {
 
     }

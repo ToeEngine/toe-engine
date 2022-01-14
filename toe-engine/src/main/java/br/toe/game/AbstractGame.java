@@ -103,10 +103,13 @@ public abstract class AbstractGame {
         GameSettings.known().forEach(pair -> logger.debug(pair.toString()));
         logger.debug("------ Game Settings ------");
 
+//        Layers.push(new ImGuiLayer());
+
         logger.info("Launching");
         GameState.running = true;
 
         final var executor = Executors.newCachedThreadPool();
+        executor.execute(new RenderThread());
         executor.execute(new GameThread());
         executor.execute(new AudioThread());
         executor.execute(new NetworkThread());

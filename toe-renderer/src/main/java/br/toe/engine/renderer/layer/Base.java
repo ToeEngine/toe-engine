@@ -8,6 +8,7 @@ interface Base extends Lifecycle {
     String getName();
 
     void update ();
+    void render();
     void handle(Event event);
 
 }

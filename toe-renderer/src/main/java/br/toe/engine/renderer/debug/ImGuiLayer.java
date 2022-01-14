@@ -126,6 +126,11 @@ public class ImGuiLayer extends Layer {
     }
 
     @Override
+    public void render () {
+
+    }
+
+    @Override
     public void handle (Event e) {
         if (glfwGetWindowAttrib(windowPtr, GLFW_FOCUSED) == GLFW_FALSE)
             return;
